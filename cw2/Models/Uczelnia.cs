@@ -6,14 +6,33 @@ namespace cw2.Models
 {
     public class Uczelnia
     {
-        public Uczelnia() {
+        public Uczelnia()
+        {
             Students = new HashSet<Student>();
-            DateOfCreation = DateTime.Now.ToString("yyyy-mm-dd");
+            DateEst = DateTime.Now.ToString("yyyy-mm-dd");
+            nowStudy = new HashSet<NowStudy>();
         }
-        [XmlAttribute]
-        public string Author { get; set; }
-        [XmlAttribute(AttributeName = "CreatedAt")]
-        public string DateOfCreation { get; set; }
+
+        [XmlAttribute] public String Author { get; set; }
+
+        [XmlAttribute(AttributeName = "Created at")]
+        public string DateEst { get; set; }
+
         public HashSet<Student> Students { get; set; }
+        public HashSet<NowStudy> nowStudy { get; set; }
+
+        public NowStudy getNow(NowStudy element)
+        {
+            if (nowStudy.Contains(element))
+            {
+                foreach (NowStudy now in nowStudy)
+                {
+                    if (element.Equals(now))
+                        return now;
+                }
+            }
+
+            return null;
+        }
     }
 }
